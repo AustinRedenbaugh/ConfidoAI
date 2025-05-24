@@ -67,12 +67,10 @@ async def websocket_endpoint(websocket: WebSocket):
                 
                 now = datetime.now(ZoneInfo("America/New_York"))
                 formatted_time = now.strftime("%A, %B %-d, %-I:%M%p").lower().replace("pm", "pm").replace("am", "am")
-                # Capitalize the first letter manually
-                formatted_time_nice = formatted_time[0].upper() + formatted_time[1:]
 
                 full_system_prompt = (
                     FrontDeskAssistant.system_prompt +
-                    f"\nAt the beginning of this call, the time and date was: {formatted_time_nice} | {formatted_time}"
+                    f"\nAt the beginning of this call, the time and date was: {formatted_time}"
                 )
                 sessions[call_sid] = [{"role": "system", "content": full_system_prompt}]
 
